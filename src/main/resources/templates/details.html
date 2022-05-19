@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+
+<div th:insert="navbar.html :: header"></div>
+
+<div class="container mt-6">
+    <div class="row">
+        <div class="col-6 mx-auto" th:object="${item}">
+            <form th:action="@{'/item'}" th:object="${item}" method="post">
+            <input type="hidden" name="id" th:value="${item.id}">
+            <div class="row mt-3">
+                <div class="col-12">
+                    <label>NAME:</label>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-12">
+                    <input type="text" name="name" class="form-control" th:field = "*{name}" th:value="${item.getName()}">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12">
+                    <label>PRICE:</label>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-12">
+                    <input type="number" name="price" class="form-control" th:field = "*{price}" th:value="${item.getPrice()}">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12">
+                    <label>EMAIL:</label>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-12">
+                    <input type="number" name="amount" class="form-control" th:field = "*{amount}" th:value="${item.getAmount()}">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12">
+                    <label>MANUFACTURER:</label>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-12">
+<!--                    <select name="manufacturer_id" class="form-control">-->
+<!--                        <option th:each="manufacturer: ${manufacturers}" th:text="${manufacturer.getName()}" th:value="${manufacturer.getId()}" th:selected="manufacturer.id == item.manufacturer.id"></option>-->
+<!--                    </select>-->
+                    <select name="manufacturer_id" class="form-control">
+                        <option th:each="manufacturer: ${manufacturers}" th:text="${manufacturer.getName()} + '/' + ${manufacturer.getCode()}" th:value="${manufacturer.getId()}" th:selected="${manufacturer.id == item.manufacturer.id}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12">
+                    <button class="btn btn-success">UPDATE</button>
+                    <a class="btn btn-danger ml-3" aria-current="page" th:href="@{'/items'}">CANCEL</a>
+                </div>
+            </div>
+            </form>
+
+
+
+
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
